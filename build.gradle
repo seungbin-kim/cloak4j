@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'io.github.seungbinkim'
+group = 'io.github'
 version = '1.0-SNAPSHOT'
 
 repositories {
