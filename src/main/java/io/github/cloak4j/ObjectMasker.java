@@ -4,6 +4,7 @@ import io.github.cloak4j.annotation.AutoMasking;
 import io.github.cloak4j.annotation.FieldMasking;
 import io.github.cloak4j.annotation.IgnoreMasking;
 import io.github.cloak4j.annotation.ManualMasking;
+import io.github.cloak4j.handler.RRNMaskingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,8 @@ public class ObjectMasker {
 
     public ObjectMasker() {
         this(Set.of(
-                // TODO 기본제공 핸들러 설정
+                new RRNMaskingHandler()
+                // TODO 기본제공 핸들러 구현 후 추가
         ));
     }
 
