@@ -2,6 +2,9 @@ package io.github.cloak4j;
 
 public class SimpleMasker {
 
+    private SimpleMasker() {
+    }
+
     public static String mask(String target, int startIndex, int maskingLength, char maskingChar) {
         if (target == null || target.isBlank()) {
             return target;
@@ -12,12 +15,15 @@ public class SimpleMasker {
 
         String s = maskingChar + "";
         int targetLength = target.length();
+        if (startIndex >= targetLength) {
+            return target;
+        }
         if ((long) startIndex + maskingLength > targetLength) {
             return target.substring(0, startIndex) + s.repeat(targetLength - startIndex);
         }
 
         return target.substring(0, startIndex)
-                + s.repeat(targetLength - startIndex)
+                + s.repeat(maskingLength)
                 + target.substring(startIndex + maskingLength);
     }
 
