@@ -1,5 +1,9 @@
 package io.github.cloak4j;
 
+import io.github.cloak4j.annotation.AutoMasking;
+import io.github.cloak4j.annotation.FieldMasking;
+import io.github.cloak4j.annotation.IgnoreMasking;
+import io.github.cloak4j.annotation.ManualMasking;
 import io.github.cloak4j.handler.PhoneNumberMaskingHandler;
 import org.junit.jupiter.api.Test;
 

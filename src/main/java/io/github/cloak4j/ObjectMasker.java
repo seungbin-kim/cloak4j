@@ -1,5 +1,9 @@
 package io.github.cloak4j;
 
+import io.github.cloak4j.annotation.AutoMasking;
+import io.github.cloak4j.annotation.FieldMasking;
+import io.github.cloak4j.annotation.IgnoreMasking;
+import io.github.cloak4j.annotation.ManualMasking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,6 @@
-package io.github.cloak4j;
+package io.github.cloak4j.annotation;
+
+import io.github.cloak4j.MaskingHandler;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
