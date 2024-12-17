@@ -32,6 +32,9 @@ public class RRNMaskingHandler implements MaskingHandler {
 
     @Override
     public boolean supports(String in) {
+        if (in == null) {
+            return false;
+        }
         return RRN_PATTERN.matcher(in).matches();
     }
 

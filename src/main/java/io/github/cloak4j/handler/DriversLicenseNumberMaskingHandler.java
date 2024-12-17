@@ -11,7 +11,7 @@ public class DriversLicenseNumberMaskingHandler implements MaskingHandler {
 
     public DriversLicenseNumberMaskingHandler() {
         this.DRIVERS_LICENSE_NUMBER_PATTERN =
-                Pattern.compile("^(?<nonMasking>\\d{2}-\\d{2})-(?<masking1>\\d{6})-(?<masking2>\\d{2})$");
+                Pattern.compile("^(?<nonMasking>\\d{2}-\\d{2}-)(?<masking>\\d{6}-\\d{2})$");
     }
 
     @Override
@@ -27,14 +27,14 @@ public class DriversLicenseNumberMaskingHandler implements MaskingHandler {
         }
 
         return matcher.group("nonMasking")
-                + "-"
-                + (maskingChar + "").repeat(matcher.group("masking1").length())
-                + "-"
-                + (maskingChar + "").repeat(matcher.group("masking2").length());
+                + matcher.group("masking").replaceAll("\\d", maskingChar + "");
     }
 
     @Override
     public boolean supports(String in) {
+        if (in == null) {
+            return false;
+        }
         return DRIVERS_LICENSE_NUMBER_PATTERN.matcher(in).matches();
     }
 
