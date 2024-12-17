@@ -1,4 +1,4 @@
-package io.github.cloak4j.annotation;
+package io.github.cloak4j;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
