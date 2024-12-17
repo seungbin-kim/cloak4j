@@ -1,6 +1,5 @@
 package io.github.cloak4j;
 
-import io.github.cloak4j.handler.DefaultHandlerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

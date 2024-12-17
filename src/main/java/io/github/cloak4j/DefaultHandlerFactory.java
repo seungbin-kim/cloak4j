@@ -1,6 +1,11 @@
-package io.github.cloak4j.handler;
+package io.github.cloak4j;
 
-import io.github.cloak4j.MaskingHandler;
+import io.github.cloak4j.handler.AddressMaskingHandler;
+import io.github.cloak4j.handler.CardNumberMaskingHandler;
+import io.github.cloak4j.handler.DriversLicenseNumberMaskingHandler;
+import io.github.cloak4j.handler.EmailMaskingHandler;
+import io.github.cloak4j.handler.PhoneNumberMaskingHandler;
+import io.github.cloak4j.handler.RRNMaskingHandler;
 
 import java.util.Set;
 

@@ -1,6 +1,5 @@
 package io.github.cloak4j;
 
-import io.github.cloak4j.handler.DefaultHandlerFactory;
 import io.github.cloak4j.handler.PhoneNumberMaskingHandler;
 import org.junit.jupiter.api.Test;
 
