@@ -20,7 +20,7 @@ class ObjectMaskerTest {
     @Test
     void constructor_1() {
         // given
-        Set<MaskingHandler> defaultHandlerSet = DefaultHandlerFactory.getDefaultHandlerSet();
+        Set<MaskingHandler> defaultHandlerSet = DefaultHandlerFactory.generateDefaultHandlerSet();
 
         // when
         ObjectMasker objectMasker = new ObjectMasker(defaultHandlerSet);

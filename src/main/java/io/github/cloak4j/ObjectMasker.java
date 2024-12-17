@@ -23,19 +23,40 @@ public class ObjectMasker {
 
     private final Map<Class<? extends MaskingHandler>, MaskingHandler> maskingHandlerMap;
 
+    /**
+     * {@link DefaultHandlerFactory#generateDefaultHandlerSet()} 메서드가 반환하는 기본제공 핸들러를 가진 Masker 생성
+     */
     public ObjectMasker() {
-        this(DefaultHandlerFactory.getDefaultHandlerSet());
+        this(DefaultHandlerFactory.generateDefaultHandlerSet());
     }
 
+    /**
+     * 인자로 넘겨받은 핸들러만 가진 Masker 생성.</br>
+     * 기본제공 핸들러를 가져야 한다면 인자에 포함시키거나 {@link #addHandler(MaskingHandler)} 으로 추가하여야 합니다.
+     *
+     * @param maskingHandlers {@link MaskingHandler} 인터페이스를 구현한 Handler 집합
+     */
     public ObjectMasker(Set<MaskingHandler> maskingHandlers) {
         this.maskingHandlerMap = new HashMap<>();
         maskingHandlers.forEach(handler -> maskingHandlerMap.put(handler.getClass(), handler));
     }
 
+    /**
+     * MaskingHandler 추가
+     *
+     * @param handler {@link MaskingHandler} 인터페이스를 구현한 Handler
+     */
     public void addHandler(MaskingHandler handler) {
         this.maskingHandlerMap.put(handler.getClass(), handler);
     }
 
+    /**
+     * Masker 내부에 저장된 {@code handlerClass} 인스턴스를 얻습니다.
+     *
+     * @param handlerClass {@link MaskingHandler} 인터페이스를 구현한 Handler 클래스
+     * @param <T>          {@link MaskingHandler} 인터페이스를 구현한 클래스의 타입
+     * @return {@code handlerClass} 인스턴스를 가지고 있다면 반환. 없다면 null
+     */
     public <T extends MaskingHandler> T getHandler(Class<T> handlerClass) {
         MaskingHandler handler = this.maskingHandlerMap.get(handlerClass);
         if (handler == null) {
@@ -45,7 +66,15 @@ public class ObjectMasker {
         return (T) handler;
     }
 
-    public <T> void mask(T object) {
+    /**
+     * 객체의 필드를 마스킹 처리합니다.</br>
+     * 대상 클래스 상단에 {@link ManualMasking} 어노테이션 존재시 {@link FieldMasking} 으로 지정한 필드만 마스킹 처리됩니다.</br>
+     * 대상 클래스 상단에 {@link AutoMasking} 어노테이션 존재시 현재 가지고 있는 {@link MaskingHandler}를 활용합니다.<br>
+     * 처리할 핸들러가 존재하지 않으면 마스킹되지 않습니다.
+     *
+     * @param object 마스킹 처리할 필드가 존재하는 객체
+     */
+    public void mask(Object object) {
         Class<?> clazz = object.getClass();
         if (clazz.isAnnotationPresent(ManualMasking.class)) {
             maskFields(object, this::shouldMaskManually, null);

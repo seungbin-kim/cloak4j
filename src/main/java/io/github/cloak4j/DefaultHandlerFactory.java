@@ -11,7 +11,12 @@ import java.util.Set;
 
 public class DefaultHandlerFactory {
 
-    public static Set<MaskingHandler> getDefaultHandlerSet() {
+    /**
+     * 라이브러리가 기본으로 제공하는 마스킹 핸들러들을 생성합니다.
+     *
+     * @return 기본제공 핸들러 Set
+     */
+    public static Set<MaskingHandler> generateDefaultHandlerSet() {
         return Set.of(
                 new RRNMaskingHandler(),
                 new PhoneNumberMaskingHandler(),
