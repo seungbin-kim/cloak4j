@@ -68,9 +68,14 @@ public class ObjectMasker {
 
     /**
      * 객체의 필드를 마스킹 처리합니다.</br>
-     * 대상 클래스 상단에 {@link ManualMasking} 어노테이션 존재시 {@link FieldMasking} 으로 지정한 필드만 마스킹 처리됩니다.</br>
-     * 대상 클래스 상단에 {@link AutoMasking} 어노테이션 존재시 현재 가지고 있는 {@link MaskingHandler}를 활용합니다.<br>
-     * 처리할 핸들러가 존재하지 않으면 마스킹되지 않습니다.
+     * 대상 클래스 상단 {@link ManualMasking} 어노테이션 존재시 {@link FieldMasking}(또는 사용자 정의)어노테이션으로
+     * 지정한 필드만 마스킹 처리됩니다.</br>
+     * </br>
+     * 대상 클래스 상단 {@link AutoMasking} 어노테이션 존재시 Masker 인스턴스가 가진 {@link MaskingHandler}를 활용해
+     * 자동으로 마스킹 처리합니다.</br>
+     * 특정 필드만 {@link FieldMasking}(또는 사용자 정의)어노테이션을 사용하여 마스킹 핸들러를 지정할 수 있습니다.</br>
+     * </br>
+     * 처리할 마스킹 핸들러가 존재하지 않으면 마스킹되지 않습니다.
      *
      * @param object 마스킹 처리할 필드가 존재하는 객체
      */
