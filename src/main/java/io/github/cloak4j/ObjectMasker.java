@@ -71,9 +71,7 @@ public class ObjectMasker {
             if (isObjectField(field)) {
                 mask(value);
             } else if (value instanceof String) {
-                String maskedValue = (autoMaskingChar != null) ?
-                        maskValueAutomatically((String) value, autoMaskingChar) :
-                        maskValue((String) value, field);
+                String maskedValue = maskValue((String) value, field, autoMaskingChar);
                 if (!value.equals(maskedValue)) {
                     field.set(object, maskedValue);
                 }
@@ -83,21 +81,21 @@ public class ObjectMasker {
         }
     }
 
-    private String maskValueAutomatically(String value, char autoMaskingChar) {
-        return maskingHandlerMap.values().stream()
-                .filter(handler -> handler.supports(value))
-                .findFirst()
-                .map(handler -> handler.mask(value, autoMaskingChar))
-                .orElse(value);
-    }
-
-    private String maskValue(String value, Field field) {
-        return getFieldMaskingAnnotation(field)
-                .map(fieldMasking -> {
+    private String maskValue(String value, Field field, Character autoMaskingChar) {
+        return getFieldMaskingAnnotation(field).map(fieldMasking -> {
                     MaskingHandler handler = maskingHandlerMap.get(fieldMasking.handler());
                     return handler != null ? handler.mask(value, fieldMasking.maskingChar()) : value;
                 })
-                .orElse(value);
+                .orElseGet(() -> {
+                    if (autoMaskingChar != null) {
+                        return maskingHandlerMap.values().stream()
+                                .filter(handler -> handler.supports(value))
+                                .findFirst()
+                                .map(handler -> handler.mask(value, autoMaskingChar))
+                                .orElse(value);
+                    }
+                    return value;
+                });
     }
 
     private boolean shouldMaskManually(Field field) {
