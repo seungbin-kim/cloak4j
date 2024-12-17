@@ -6,160 +6,69 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DriversLicenseNumberMaskingHandlerTest {
 
+    static final String[][] VALID_LICENSE_NUMBERS = {
+            {"11-11-123456-11", "11-11-******-**"}
+    };
+
+    static final String[] INVALID_LICENSE_NUMBERS = {
+            "111-11-123456-11",
+            "11-111-123456-11",
+            "11-11-1123456-11",
+            "11-11-123456-111",
+            "   ",
+            null,
+    };
+
     @Test
     void supports_true_1() {
         // given
-        String dln = "11-11-123456-11";
+        for (String[] number : VALID_LICENSE_NUMBERS) {
+            // when
+            DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
+            boolean supports = handler.supports(number[0]);
 
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        boolean supports = handler.supports(dln);
-
-        // then
-        assertTrue(supports);
+            // then
+            assertTrue(supports);
+        }
     }
 
     @Test
     void supports_false_1() {
         // given
-        String dln = "111-11-123456-11";
+        for (String number : INVALID_LICENSE_NUMBERS) {
+            // when
+            DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
+            boolean supports = handler.supports(number);
 
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        boolean supports = handler.supports(dln);
-
-        // then
-        assertFalse(supports);
-    }
-
-    @Test
-    void supports_false_2() {
-        // given
-        String dln = "11-111-123456-11";
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        boolean supports = handler.supports(dln);
-
-        // then
-        assertFalse(supports);
-    }
-
-    @Test
-    void supports_false_3() {
-        // given
-        String dln = "11-11-1123456-11";
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        boolean supports = handler.supports(dln);
-
-        // then
-        assertFalse(supports);
-    }
-
-    @Test
-    void supports_false_4() {
-        // given
-        String dln = "11-11-123456-111";
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        boolean supports = handler.supports(dln);
-
-        // then
-        assertFalse(supports);
+            // then
+            assertFalse(supports);
+        }
     }
 
     @Test
     void mask_valid_1() {
         // given
-        String dln = "11-11-123456-11";
+        for (String[] number : VALID_LICENSE_NUMBERS) {
+            // when
+            DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
+            String masked = handler.mask(number[0], '*');
 
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        String masked = handler.mask(dln, '*');
-
-        // then
-        assertEquals("11-11-******-**", masked);
+            // then
+            assertEquals(number[1], masked);
+        }
     }
 
     @Test
     void mask_invalid_1() {
         // given
-        String dln = "111-11-123456-11";
+        for (String number : INVALID_LICENSE_NUMBERS) {
+            // when
+            DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
+            String masked = handler.mask(number, '*');
 
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        String masked = handler.mask(dln, '*');
-
-        // then
-        assertEquals(dln, masked);
-    }
-
-    @Test
-    void mask_invalid_2() {
-        // given
-        String dln = "11-111-123456-11";
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        String masked = handler.mask(dln, '*');
-
-        // then
-        assertEquals(dln, masked);
-    }
-
-    @Test
-    void mask_invalid_3() {
-        // given
-        String dln = "11-11-1123456-11";
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        String masked = handler.mask(dln, '*');
-
-        // then
-        assertEquals(dln, masked);
-    }
-
-    @Test
-    void mask_invalid_4() {
-        // given
-        String dln = "11-11-123456-111";
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        String masked = handler.mask(dln, '*');
-
-        // then
-        assertEquals(dln, masked);
-    }
-
-    @Test
-    void mask_null() {
-        // given
-        String dln = null;
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        String masked = handler.mask(dln, '*');
-
-        // then
-        assertEquals(dln, masked);
-    }
-
-    @Test
-    void mask_blank() {
-        // given
-        String dln = "   ";
-
-        // when
-        DriversLicenseNumberMaskingHandler handler = new DriversLicenseNumberMaskingHandler();
-        String masked = handler.mask(dln, '*');
-
-        // then
-        assertEquals(dln, masked);
+            // then
+            assertEquals(number, masked);
+        }
     }
 
 }
