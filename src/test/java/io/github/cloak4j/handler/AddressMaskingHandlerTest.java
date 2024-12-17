@@ -47,6 +47,32 @@ class AddressMaskingHandlerTest {
     }
 
     @Test
+    void supports_null_false() {
+        // given
+        String address = null;
+
+        // when
+        AddressMaskingHandler handler = new AddressMaskingHandler();
+        boolean supports = handler.supports(address);
+
+        // then
+        assertFalse(supports);
+    }
+
+    @Test
+    void supports_blank_false() {
+        // given
+        String address = "   ";
+
+        // when
+        AddressMaskingHandler handler = new AddressMaskingHandler();
+        boolean supports = handler.supports(address);
+
+        // then
+        assertFalse(supports);
+    }
+
+    @Test
     void supports_valid_1() {
         // given
         for (String[] address : ADDRESSES) {
