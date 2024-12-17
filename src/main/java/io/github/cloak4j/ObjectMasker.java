@@ -1,10 +1,6 @@
 package io.github.cloak4j;
 
-import io.github.cloak4j.annotation.AutoMasking;
-import io.github.cloak4j.annotation.FieldMasking;
-import io.github.cloak4j.annotation.IgnoreMasking;
-import io.github.cloak4j.annotation.ManualMasking;
-import io.github.cloak4j.handler.RRNMaskingHandler;
+import io.github.cloak4j.handler.DefaultHandlerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,13 +17,11 @@ import static java.util.function.Predicate.not;
 public class ObjectMasker {
 
     private static final Logger logger = LoggerFactory.getLogger(ObjectMasker.class);
+
     private final Map<Class<? extends MaskingHandler>, MaskingHandler> maskingHandlerMap;
 
     public ObjectMasker() {
-        this(Set.of(
-                new RRNMaskingHandler()
-                // TODO 기본제공 핸들러 구현 후 추가
-        ));
+        this(DefaultHandlerFactory.getDefaultHandlerSet());
     }
 
     public ObjectMasker(Set<MaskingHandler> maskingHandlers) {
@@ -37,6 +31,15 @@ public class ObjectMasker {
 
     public void addHandler(MaskingHandler handler) {
         this.maskingHandlerMap.put(handler.getClass(), handler);
+    }
+
+    public <T extends MaskingHandler> T getHandler(Class<T> handlerClass) {
+        MaskingHandler handler = this.maskingHandlerMap.get(handlerClass);
+        if (handler == null) {
+            return null;
+        }
+        //noinspection unchecked
+        return (T) handler;
     }
 
     public <T> void mask(T object) {
