@@ -222,4 +222,16 @@ class SimpleMaskerTest {
         assertEquals("***********", masked);
     }
 
+    @Test
+    void mask_overloading_endIndex_5() {
+        // given
+        String target = "Hello World";
+
+        // when
+        String masked = SimpleMasker.mask(target, '*', 0);
+
+        // then
+        assertEquals("Hello World", masked);
+    }
+
 }
