@@ -6,7 +6,7 @@ public class SimpleMasker {
     }
 
     /**
-     * 공백이 아닌 문자열을 받아 {@code startIndex}부터 {@code maskingLength} 길이만큼 마스킹한 결과를 반환합니다.</br>
+     * 공백이 아닌 문자열을 받아 {@code startIndex}부터 {@code maskingLength} 길이만큼 마스킹한 결과를 반환합니다.<br/>
      * {@code startIndex} 또는 {@code maskingLength} 값이 0 미만이라면 마스킹되지 않습니다.
      *
      * @param target        마스킹 대상 문자열
@@ -38,7 +38,7 @@ public class SimpleMasker {
     }
 
     /**
-     * 공백이 아닌 문자열을 받아 {@code startIndex} 부터 끝까지 마스킹한 결과를 반환합니다.</br>
+     * 공백이 아닌 문자열을 받아 {@code startIndex} 부터 끝까지 마스킹한 결과를 반환합니다.<br/>
      * {@code startIndex} 값이 0 미만이라면 마스킹되지 않습니다.
      *
      * @param target      마스킹 대상 문자열
@@ -51,7 +51,7 @@ public class SimpleMasker {
     }
 
     /**
-     * 공백이 아닌 문자열을 받아 처음부터 {@code endIndex} 까지 마스킹한 결과를 반환합니다.</br>
+     * 공백이 아닌 문자열을 받아 처음부터 {@code endIndex} 까지 마스킹한 결과를 반환합니다.<br/>
      * {@code endIndex} 값이 0 미만이라면 마스킹되지 않습니다.
      *
      * @param target      마스킹 대상 문자열
