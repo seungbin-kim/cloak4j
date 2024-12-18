@@ -1,0 +1,20 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            from components.java
+            groupId = 'com.github.seungbin-kim' as Publication
+            artifactId = 'cloak4j' as Publication
+            version = '1.0.0' as Publication
+        }
+    }
+}

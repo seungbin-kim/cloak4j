@@ -1,2 +1,4 @@
-rootProject.name = 'cloak4j'
+rootProject.name = 'cloak4j-parent'
 
+include(':cloak4j')
+include(':examples')

@@ -2,20 +2,23 @@ plugins {
     id 'java'
 }
 
-group = 'io.github'
-version = '1.0-SNAPSHOT'
+subprojects {
+    apply plugin: 'java'
 
-repositories {
-    mavenCentral()
-}
+    group = 'com.github.seungbin-kim'
+    sourceCompatibility = '17'
 
-dependencies {
-    implementation('org.slf4j:slf4j-api:2.0.16')
+    repositories {
+        mavenCentral()
+    }
 
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
+    dependencies {
+        implementation('org.slf4j:slf4j-api:2.0.16')
+        testImplementation platform('org.junit:junit-bom:5.10.0')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+    }
 
-test {
-    useJUnitPlatform()
+    test {
+        useJUnitPlatform()
+    }
 }
