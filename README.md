@@ -1,8 +1,8 @@
 # cloak4j
 
-<div style="text-align:center">
+<p align="center">
   <img src="docs/images/logo.png" alt="logo">
-</div>
+</p>
 
 cloak4j는 문자열을 마스킹 처리해 주는 자바 라이브러리 입니다.
 
@@ -21,7 +21,7 @@ cloak4j는 문자열을 마스킹 처리해 주는 자바 라이브러리 입니
 
 제공되는 기본 처리기 외에 사용자 정의 마스킹 처리기를 구현할 수 있으며, 사용자 정의 어노테이션으로 더욱 간단한 사용이 가능합니다.
 
-자세한 사용 예제들은 [examples 프로젝트](examples/src/test/java/examples)의 *Example.java 코드들을 참고해 주세요.
+자세한 사용 예제들은 [examples 프로젝트](examples/src/test/java/examples)의 *Example.java 패키지에 함께 존재하는 코드들을 참고해 주세요.
 
 # 의존성 가져오기
 
