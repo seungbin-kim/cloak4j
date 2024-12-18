@@ -9,6 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/cloak4j" />
+            <option value="$PROJECT_DIR$/examples" />
           </set>
         </option>
       </GradleProjectSettings>
