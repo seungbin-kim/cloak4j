@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class ObjectMasker {
      * @param maskingHandlers {@link MaskingHandler} 인터페이스를 구현한 Handler 집합
      */
     public ObjectMasker(Set<MaskingHandler> maskingHandlers) {
-        this.maskingHandlerMap = new HashMap<>();
+        this.maskingHandlerMap = new LinkedHashMap<>();
         maskingHandlers.forEach(handler -> maskingHandlerMap.put(handler.getClass(), handler));
     }
 
